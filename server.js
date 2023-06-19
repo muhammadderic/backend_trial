@@ -1,5 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const todoRoutes = require("./app/routes/todoRoutes");
 
 const port = process.env.PORT || 5000;
 
@@ -10,9 +11,7 @@ dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/", (req, res) => {
-  res.send("Hello Deric");
-});
+app.use("/api/v1/todo", todoRoutes);
 
 // Start the server
 app.listen(port, () => {
