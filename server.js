@@ -1,5 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const path = require("path");
 const todoRoutes = require("./app/routes/todoRoutes");
 const connectDB = require("./configs/database");
 
@@ -11,7 +12,18 @@ dotenv.config();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "/public")));
 
+// View engine set up
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
+// Template engine render
+app.get("/", (req, res) => {
+  res.render("index");
+})
+
+// Routes
 app.use("/api/v1/todo", todoRoutes);
 
 // Connect to the database
