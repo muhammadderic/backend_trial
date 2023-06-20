@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const path = require("path");
 const todoRoutes = require("./app/routes/todoRoutes");
 const connectDB = require("./configs/database");
+const { configureHelmet, configureCors } = require("./configs/security");
 
 const port = process.env.PORT || 5000;
 
@@ -13,6 +14,10 @@ dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "/public")));
+
+// Security
+configureHelmet(app);
+configureCors(app);
 
 // View engine set up
 app.set("views", path.join(__dirname, "views"));
