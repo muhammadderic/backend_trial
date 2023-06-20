@@ -1,9 +1,13 @@
 const Todo = require("../models/todoModel");
+const sanitizeInput = require("../utils/sanitizer");
 
 // POST a new todo
 const createTodo = async (req, res) => {
   try {
-    const { title, description } = req.body;
+    const title = sanitizeInput(req.body.title);
+    const description = sanitizeInput(req.body.description);
+
+    // const { title, description } = req.body;
     const newTodo = new Todo({ title, description });
     const savedTodo = await newTodo.save();
     res.status(201).json(savedTodo);

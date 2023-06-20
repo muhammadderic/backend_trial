@@ -24,7 +24,7 @@ const submitHandler = (e) => {
       // Handle the response
       console.log(data);
 
-      window.location.reload();
+      // window.location.reload();
     })
     .catch(error => console.error({ error: error.message }));
 }
