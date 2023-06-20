@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "jest --runInBand --detectOpenHandles --forceExit"
+    "test:controller": "jest tests/units/todoController.test.js --detectOpenHandles --forceExit",
+    "test:routes": "jest tests/integration/todoRoutes.test.js --detectOpenHandles --forceExit"
   },
   "author": "muhammadderic",
   "license": "ISC",
