@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const todoRoutes = require("./app/routes/todoRoutes");
+const connectDB = require("./configs/database");
 
 const port = process.env.PORT || 5000;
 
@@ -13,7 +14,14 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/v1/todo", todoRoutes);
 
-// Start the server
-app.listen(port, () => {
-  console.log(`server listening on port ${port}`);
-});
+// Connect to the database
+connectDB()
+  .then(() => {
+    // Start the server
+    app.listen(port, () => {
+      console.log(`server listening on port ${port}`);
+    })
+  })
+  .catch((error) => {
+    console.error("server cannot listening: ", error.message);
+  })
